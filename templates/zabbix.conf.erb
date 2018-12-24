@@ -1,0 +1,25 @@
+server {
+       listen 80;
+       ssl off;
+        server_name  localhost;
+        root   /var/www/html;
+
+
+        #ssl_prefer_server_ciphers  on;
+        #ssl_ciphers  'ECDH !aNULL !eNULL !SSLv2 !SSLv3';
+        #ssl_certificate  /etc/nginx/ssl/server.crt;
+        #ssl_certificate_key  /etc/nginx/ssl/server.key;
+        location / {
+                index  index.html index.htm index.php;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+                root   /usr/share/nginx/html;
+        }
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+                include        fastcgi_params;
+        }
+}
+
