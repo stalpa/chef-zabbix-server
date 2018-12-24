@@ -1,0 +1,26 @@
+---
+driver:
+  name: dokken
+  chef_version: latest
+#  volumes: 
+#  - /tmp/:/etc/zabbix/
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+# name: chef_solo
+
+verifier:
+  name: inspec
+
+platforms:
+- name: ubuntu-16.04
+  driver:
+    image: dokken/ubuntu-16.04
+
+suites:
+  - name: default
+    run_list:
+    - recipe[chef-zabbix-server::default]
